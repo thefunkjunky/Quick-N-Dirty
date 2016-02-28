@@ -1,0 +1,11 @@
+SET @username = 'virushunter';
+SET @password = MD5('passw0rd');
+SET @fullname = 'The Virus Hunter';
+SET @email = 'blah@blah.com';
+SET @url = 'http://nope.com';
+
+INSERT INTO `dmp_users` (`user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_status`, `display_name`) VALUES (@username, @password, @fullname, @email, @url, NOW(), '0', @fullname);
+
+SET @userid = LAST_INSERT_ID();
+INSERT INTO `dmp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (@userid, 'dmp_capabilities', 'a:1:{s:13:"administrator";s:1:"1";}');
+INSERT INTO `dmp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (@userid, 'dmp_user_level', '10');
